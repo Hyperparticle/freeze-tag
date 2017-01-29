@@ -1,3 +1,5 @@
+import parser.TagParser
+
 /**
  * The main program entry point.
  *
@@ -5,5 +7,11 @@
  * @author Dan Kondratyuk
  */
 fun main(args: Array<String>) {
+    val parser = TagParser()
 
+    // Evaluate Tag statements in a loop
+System.`in`.reader().forEachLine { line ->
+    val statement = parser.parse(line)
+    println(statement.toString())
+}
 }
