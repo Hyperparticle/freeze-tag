@@ -38,10 +38,11 @@ class TagParser {
      */
     private fun validateExpressions(expressions: List<TagExpression>) {
         // TODO
-
     }
 
-    /** Split the statement into its constituent (string) expressions */
+    /**
+     * Split the statement into its constituent (string) expressions
+     */
     private fun splitTokens(statement: String): List<String> =
             statement.split(TagSymbol.symbolRegex).map(String::trim)
 
@@ -79,7 +80,7 @@ class TagParser {
         }
 
         if (key.contains(TagSymbol.requestSymbol) || value.contains(TagSymbol.requestSymbol)) {
-            throw ParseException("Expression can only have one request symbol as a postfix $token")
+            throw ParseException("Expression can only have one '${TagSymbol.requestSymbol}' symbol: $token")
         }
 
         return TagExpression(symbol, key, value, isRequest)

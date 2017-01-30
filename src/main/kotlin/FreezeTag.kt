@@ -1,3 +1,4 @@
+import parser.ParseException
 import parser.TagParser
 
 /**
@@ -11,7 +12,13 @@ fun main(args: Array<String>) {
 
     // Evaluate Tag statements in a loop
     System.`in`.reader().forEachLine { line ->
-        val statement = parser.parse(line)
+        val statement = try {
+            parser.parse(line)
+        } catch (e: ParseException) {
+            System.err.println(e.message)
+            return@forEachLine
+        }
+
         println(statement)
     }
 }
