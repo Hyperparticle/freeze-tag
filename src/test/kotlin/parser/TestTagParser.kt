@@ -53,7 +53,7 @@ class TestTagParser : StringSpec() {
 
                     row("#name dog #color brown",   2, listOf("name", "color"),    listOf("dog", "brown")),
                     row("#name a b c  #name a b c", 2, listOf("name", "name"),     listOf("a b c", "a b c")),
-                    row("#a b -c d #e f +g h",      4, listOf("a", "c", "f", "g"), listOf("b", "d", "f", "h"))
+                    row("#a b -c d #e f +g h",      4, listOf("a", "c", "e", "g"), listOf("b", "d", "f", "h"))
             )
 
             val parser = TagParser()
@@ -113,9 +113,9 @@ class TestTagParser : StringSpec() {
         "should fail to parse an invalid expression" {
             val statementTable = table(
                     headers("input"),
-                    row("?"), row("@ ?"), row("# ?"),
+                    row("?"), row("@ ?"), row("# ?"), row("-  fail"),
                     row("hello?"), row("this should fail"), row("thisToo"),
-                    row("@spot # the error"), row("+fail ?")
+                    row("@spot # the error"), row("+fail ?"), row("#nope??")
             )
 
             val parser = TagParser()

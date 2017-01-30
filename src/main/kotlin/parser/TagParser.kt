@@ -10,57 +10,65 @@ import java.util.*
  */
 class TagParser {
 
-    private val symbolTokens = TagSymbol.symbols.joinToString()
-
     fun parse(statement: String): TagStatement {
-        val tokenizer = StringTokenizer(statement, symbolTokens, true)
-
         val tagStatement = TagStatement()
 
         // Please forgive me for this messy imperative code
 
-        val tokenScan = Scanner(statement)
+        val tokens = splitTokens(statement)
 
-        tokenScan.use {
-            while (tokenScan.hasNext(symbolTokens)) {
-                tokenScan.findInLine(symbolTokens)
-            }
-        }
-
-        var expectToken = false
-        var prevSymbol: TagSymbol? = null
-
-        while (tokenizer.hasMoreTokens()) {
-            expectToken = !expectToken
-            val token = tokenizer.nextToken().trim()
-
-            if (expectToken) {
-                prevSymbol = TagSymbol.symbolTable[token]
-                        ?: throw ParseException("Expression must start with a symbol: $token")
-                continue
-            }
-
-            val expression = parseExpression(prevSymbol!!, token)
-            tagStatement.add(expression)
-        }
+        tokens
+                .filter { !it.isNullOrBlank() }
+                .forEach {
+                    val expression = parseExpression(it)
+                    tagStatement.add(expression)
+                }
 
         return tagStatement
     }
 
-    private fun parseExpression(symbol: TagSymbol, token: String): TagExpression {
-        // Use scanner to eliminate whitespace
-        val scanner = Scanner(token)
+    private fun splitTokens(statement: String): List<String> {
+        val symbolConjunction = TagSymbol.symbolTable.keys
+                .map { Regex.escape(it) }
+                .joinToString("|")
+        val symbolRegex = Regex("(?=($symbolConjunction))")
 
-        val keyScan = scanner.next()
-        val value = when { scanner.hasNext() -> scanner.next() else -> "" }
-        var isRequest = false
+        val split = statement.split(symbolRegex)
+                .map(String::trim)
+
+        return split
+    }
+
+    private fun parseExpression(token: String): TagExpression {
+        if (token.isNullOrBlank()) {
+            throw ParseException("Expression cannot be blank.")
+        }
+
+        val symbol = TagSymbol.symbolTable[token.substring(0, 1)]
+                ?: throw ParseException("Expression must start with a symbol: $token")
+
+        val keyValuePair = token
+                .substring(1)
+                .split(Regex("\\s+"), 2)
+
+        val isRequest = keyValuePair[0].endsWith(TagSymbol.requestSymbol)
 
         val key = when {
-            keyScan.isEmpty() -> ""
-            else -> when {
-                keyScan.last() == '?' -> { isRequest = true; keyScan.dropLast(1) }
-                else -> keyScan
-            }
+            isRequest -> keyValuePair[0].dropLast(1)
+            else -> keyValuePair[0]
+        }
+
+        val value = when {
+            keyValuePair.size > 1 -> keyValuePair[1]
+            else -> ""
+        }
+
+        if (key.isNullOrBlank() && !value.isNullOrBlank()) {
+            throw ParseException("Expression symbol must be a prefix: $token")
+        }
+
+        if (key.contains(TagSymbol.requestSymbol) || value.contains(TagSymbol.requestSymbol)) {
+            throw ParseException("Expression can only have one request symbol as a postfix $token")
         }
 
         return TagExpression(symbol, key, value, isRequest)

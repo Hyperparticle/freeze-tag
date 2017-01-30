@@ -17,4 +17,8 @@ class TagStatement {
         expressionList.add(expression)
     }
 
+    override fun toString(): String {
+        return expressions.toString()
+    }
+
 }

@@ -13,13 +13,8 @@ enum class TagSymbol(val symbol: String) {
     MINUS("-");
 
     companion object {
-        val symbolTable: Map<String, TagSymbol> = mapOf(
-                "@" to AT,
-                "#" to HASH,
-                "+" to PLUS,
-                "-" to MINUS
-        )
-
-        val symbols: Set<String> = symbolTable.keys
+        /** Maps symbol strings to their corresponding enumerated type */
+        val symbolTable: Map<String, TagSymbol> = TagSymbol.values().associateBy({ it.symbol }, { it } )
+        val requestSymbol: String = "?"
     }
 }

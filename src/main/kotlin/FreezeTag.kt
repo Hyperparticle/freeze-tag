@@ -12,6 +12,6 @@ fun main(args: Array<String>) {
     // Evaluate Tag statements in a loop
     System.`in`.reader().forEachLine { line ->
         val statement = parser.parse(line)
-        println(statement.toString())
+        println(statement)
     }
 }
