@@ -1,5 +1,7 @@
 package parser
 
+import java.util.*
+
 /**
  *
  *
@@ -8,6 +10,11 @@ package parser
  */
 class TagStatement {
 
-//    val expressions: List<TagExpression>
+    val expressionList: MutableList<TagExpression> = ArrayList()
+    val expressions: List<TagExpression> = expressionList
+
+    fun add(expression: TagExpression) {
+        expressionList.add(expression)
+    }
 
 }

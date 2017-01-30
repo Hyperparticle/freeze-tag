@@ -10,8 +10,8 @@ fun main(args: Array<String>) {
     val parser = TagParser()
 
     // Evaluate Tag statements in a loop
-System.`in`.reader().forEachLine { line ->
-    val statement = parser.parse(line)
-    println(statement.toString())
-}
+    System.`in`.reader().forEachLine { line ->
+        val statement = parser.parse(line)
+        println(statement.toString())
+    }
 }
