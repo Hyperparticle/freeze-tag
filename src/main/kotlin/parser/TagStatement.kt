@@ -3,7 +3,7 @@ package parser
 import java.util.*
 
 /**
- *
+ * A Tag statement, composed of a list of Tag expressions.
  *
  * Created on 1/29/2017
  * @author Dan Kondratyuk

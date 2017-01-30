@@ -3,7 +3,7 @@ package parser
 import io.kotlintest.specs.StringSpec
 
 /**
- *
+ * Tests for parsing the Tag grammar.
  *
  * Created on 1/29/2017
  * @author Dan Kondratyuk
@@ -31,8 +31,9 @@ class TestTagParser : StringSpec() {
                     row("+has a\tb c\nd ",   TagSymbol.PLUS,  "has",  "a\tb c\nd", false)
             )
 
+            val parser = TagParser()
+
             forAll(singleExpressionTable) {input, symbol, key, value, isRequest ->
-                val parser = TagParser()
                 val statement = parser.parse(input)
                 val expressions = statement.expressions
 
@@ -55,8 +56,9 @@ class TestTagParser : StringSpec() {
                     row("#a b -c d #e f +g h",      4, listOf("a", "c", "f", "g"), listOf("b", "d", "f", "h"))
             )
 
+            val parser = TagParser()
+
             forAll(multiExpressionTable) { input, count, keys, values ->
-                val parser = TagParser()
                 val statement = parser.parse(input)
                 val expressions = statement.expressions
 
@@ -80,12 +82,16 @@ class TestTagParser : StringSpec() {
                     headers("input", "count", "keys", "values"),
 
                     row("@person #name Emily", 2, listOf("person", "name"), listOf("", "Emily")),
-                    row("@T #k v1 #k v2",      3, listOf("T", "k", "k"), listOf("", "v1", "v2"))
-                    // TODO
+                    row("@T #k v1 #k v2",      3, listOf("T", "k", "k"), listOf("", "v1", "v2")),
+                    row("@T #k1 v1 #k3 @T #k2 v2", 5,
+                            listOf("T", "k1", "k3", "T", "k2"),
+                            listOf("",  "v1", "",   "",  "v2")
+                    )
             )
 
+            val parser = TagParser()
+
             forAll(statementTable) { input, size, keys, values ->
-                val parser = TagParser()
                 val statement = parser.parse(input)
                 val expressions = statement.expressions
 
@@ -102,9 +108,22 @@ class TestTagParser : StringSpec() {
                     expression.value shouldBe expectedValue
                 }
             }
+        }
 
-            "should fail to parse an invalid statement" {
+        "should fail to parse an invalid expression" {
+            val statementTable = table(
+                    headers("input"),
+                    row("?"), row("@ ?"), row("# ?"),
+                    row("hello?"), row("this should fail"), row("thisToo"),
+                    row("@spot # the error"), row("+fail ?")
+            )
 
+            val parser = TagParser()
+
+            forAll(statementTable) { input ->
+                shouldThrow<ParseException> {
+                    parser.parse(input)
+                }
             }
         }
     }
