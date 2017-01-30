@@ -1,7 +1,5 @@
 package parser
 
-import java.util.*
-
 /**
  * Parses input strings and outputs formatted Tag statements.
  *
@@ -10,43 +8,56 @@ import java.util.*
  */
 class TagParser {
 
+    /**
+     * Parse the supplied statement and produce its corresponding statement object.
+     * @throws ParseException if one of the expressions in the statement is invalid
+     */
     fun parse(statement: String): TagStatement {
         val tagStatement = TagStatement()
 
-        // Please forgive me for this messy imperative code
-
-        val tokens = splitTokens(statement)
-
-        tokens
-                .filter { !it.isNullOrBlank() }
-                .forEach {
-                    val expression = parseExpression(it)
-                    tagStatement.add(expression)
-                }
+        val expressions = parseExpressions(statement)
+        validateExpressions(expressions)
+        tagStatement.add(expressions)
 
         return tagStatement
     }
 
-    private fun splitTokens(statement: String): List<String> {
-        val symbolConjunction = TagSymbol.symbolTable.keys
-                .map { Regex.escape(it) }
-                .joinToString("|")
-        val symbolRegex = Regex("(?=($symbolConjunction))")
+    /**
+     * Parse the supplied statement as a list of expressions.
+     * Use this method to ignore statement-level validation.
+     * @throws ParseException if one of the expressions in the statement is invalid
+     */
+    fun parseExpressions(statement: String): List<TagExpression> =
+            splitTokens(statement)
+                .filter { !it.isNullOrBlank() }
+                .map{ parseExpression(it) }
 
-        val split = statement.split(symbolRegex)
-                .map(String::trim)
+    /**
+     * Ensures that the list of expressions is semantically valid (i.e., correct grammar)
+     * @throws ParseException if the grammar is invalid
+     */
+    private fun validateExpressions(expressions: List<TagExpression>) {
+        // TODO
 
-        return split
     }
 
+    /** Split the statement into its constituent (string) expressions */
+    private fun splitTokens(statement: String): List<String> =
+            statement.split(TagSymbol.symbolRegex).map(String::trim)
+
+    /**
+     * Parses the token, returning its expression value
+     * @throws ParseException if the expression is invalid
+     */
     private fun parseExpression(token: String): TagExpression {
         if (token.isNullOrBlank()) {
             throw ParseException("Expression cannot be blank.")
         }
 
-        val symbol = TagSymbol.symbolTable[token.substring(0, 1)]
+        val symbol = TagSymbol.symbolMap[token.substring(0, 1)]
                 ?: throw ParseException("Expression must start with a symbol: $token")
 
+        // Split key-value pair by first occurrence of whitespace
         val keyValuePair = token
                 .substring(1)
                 .split(Regex("\\s+"), 2)
@@ -54,7 +65,7 @@ class TagParser {
         val isRequest = keyValuePair[0].endsWith(TagSymbol.requestSymbol)
 
         val key = when {
-            isRequest -> keyValuePair[0].dropLast(1)
+            isRequest -> keyValuePair[0].dropLast(TagSymbol.requestSymbol.length)
             else -> keyValuePair[0]
         }
 

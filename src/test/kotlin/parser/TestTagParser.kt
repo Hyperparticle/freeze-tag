@@ -11,6 +11,9 @@ import io.kotlintest.specs.StringSpec
 class TestTagParser : StringSpec() {
 
     init {
+        // Note: Tests for valid expressions use parser.parse() instead of parser.parseExpression()
+        // because they should also be valid statements
+
         "should parse a valid expression" {
             val singleExpressionTable = table(
                     headers("input", "symbol", "key", "value", "isRequest"),
@@ -59,6 +62,7 @@ class TestTagParser : StringSpec() {
             val parser = TagParser()
 
             forAll(multiExpressionTable) { input, count, keys, values ->
+                println(input)
                 val statement = parser.parse(input)
                 val expressions = statement.expressions
 
@@ -92,6 +96,7 @@ class TestTagParser : StringSpec() {
             val parser = TagParser()
 
             forAll(statementTable) { input, size, keys, values ->
+                println(input)
                 val statement = parser.parse(input)
                 val expressions = statement.expressions
 
@@ -115,12 +120,30 @@ class TestTagParser : StringSpec() {
                     headers("input"),
                     row("?"), row("@ ?"), row("# ?"), row("-  fail"),
                     row("hello?"), row("this should fail"), row("thisToo"),
-                    row("@spot # the error"), row("+fail ?"), row("#nope??")
+                    row("@spot # the error"), row("+fail ?"), row("#nope??"), row("#nope2? abc?")
             )
 
             val parser = TagParser()
 
             forAll(statementTable) { input ->
+                println(input)
+                shouldThrow<ParseException> {
+                    parser.parseExpressions(input)
+                }
+            }
+        }
+
+        "should fail to parse an invalid statement" {
+            val statementTable = table(
+                    headers("input"),
+                    row("#this #is invalid")
+                    // TODO
+            )
+
+            val parser = TagParser()
+
+            forAll(statementTable) { input ->
+                println(input)
                 shouldThrow<ParseException> {
                     parser.parse(input)
                 }
