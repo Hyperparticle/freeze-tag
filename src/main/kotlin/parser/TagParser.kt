@@ -1,5 +1,9 @@
 package parser
 
+import grammar.TagExpression
+import grammar.TagStatement
+import grammar.TagSymbol
+
 /**
  * Parses input strings and outputs formatted Tag statements.
  *
@@ -7,6 +11,8 @@ package parser
  * @author Dan Kondratyuk
  */
 class TagParser {
+
+    private val validator: TagValidator = TagValidator()
 
     /**
      * Parse the supplied statement and produce its corresponding statement object.
@@ -16,7 +22,7 @@ class TagParser {
         val tagStatement = TagStatement()
 
         val expressions = parseExpressions(statement)
-        validateExpressions(expressions)
+        validator.validate(expressions)
         tagStatement.add(expressions)
 
         return tagStatement
@@ -33,14 +39,6 @@ class TagParser {
                 .map{ parseExpression(it) }
 
     /**
-     * Ensures that the list of expressions is semantically valid (i.e., correct grammar)
-     * @throws ParseException if the grammar is invalid
-     */
-    private fun validateExpressions(expressions: List<TagExpression>) {
-        // TODO
-    }
-
-    /**
      * Split the statement into its constituent (string) expressions
      */
     private fun splitTokens(statement: String): List<String> =
@@ -51,10 +49,6 @@ class TagParser {
      * @throws ParseException if the expression is invalid
      */
     private fun parseExpression(token: String): TagExpression {
-        if (token.isNullOrBlank()) {
-            throw ParseException("Expression cannot be blank.")
-        }
-
         val symbol = TagSymbol.symbolMap[token.substring(0, 1)]
                 ?: throw ParseException("Expression must start with a symbol: $token")
 
@@ -83,7 +77,7 @@ class TagParser {
             throw ParseException("Expression can only have one '${TagSymbol.requestSymbol}' symbol: $token")
         }
 
-        return TagExpression(symbol, key, value, isRequest)
+        return TagExpression(symbol, key, value, isRequest, token)
     }
 
 }

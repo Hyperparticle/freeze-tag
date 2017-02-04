@@ -1,4 +1,4 @@
-package parser
+package grammar
 
 /**
  * A symbol prefix for an expression.
@@ -17,12 +17,12 @@ enum class TagSymbol(val symbol: String) {
 
     companion object {
         /** Maps symbol strings to their corresponding enumerated type */
-        val symbolMap: Map<String, TagSymbol> = TagSymbol.values().associateBy({ it.symbol }, { it } )
+        val symbolMap: Map<String, TagSymbol> = values().associateBy({ it.symbol }, { it } )
 
         /** The symbol to indicate if the expression is a request */
         val requestSymbol: String = "?"
 
-        private val symbolConjunction = TagSymbol.symbolMap.keys
+        private val symbolConjunction = symbolMap.keys
                 .map { Regex.escape(it) }
                 .joinToString("|")
 

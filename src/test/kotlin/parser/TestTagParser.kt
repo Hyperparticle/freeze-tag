@@ -1,5 +1,6 @@
 package parser
 
+import grammar.TagSymbol
 import io.kotlintest.specs.StringSpec
 
 /**
@@ -11,9 +12,6 @@ import io.kotlintest.specs.StringSpec
 class TestTagParser : StringSpec() {
 
     init {
-        // Note: Tests for valid expressions use parser.parse() instead of parser.parseExpression()
-        // because they should also be valid statements
-
         "should parse a valid expression" {
             val singleExpressionTable = table(
                     headers("input", "symbol", "key", "value", "isRequest"),
@@ -37,8 +35,7 @@ class TestTagParser : StringSpec() {
             val parser = TagParser()
 
             forAll(singleExpressionTable) {input, symbol, key, value, isRequest ->
-                val statement = parser.parse(input)
-                val expressions = statement.expressions
+                val expressions = parser.parseExpressions(input)
 
                 expressions should haveSize(1)
                 val expression = expressions.first()
@@ -85,6 +82,7 @@ class TestTagParser : StringSpec() {
             val statementTable = table(
                     headers("input", "count", "keys", "values"),
 
+                    row("", 0, emptyList(), emptyList()),
                     row("@person #name Emily", 2, listOf("person", "name"), listOf("", "Emily")),
                     row("@T #k v1 #k v2",      3, listOf("T", "k", "k"), listOf("", "v1", "v2")),
                     row("@T #k1 v1 #k3 @T #k2 v2", 5,
@@ -136,7 +134,8 @@ class TestTagParser : StringSpec() {
         "should fail to parse an invalid statement" {
             val statementTable = table(
                     headers("input"),
-                    row("#this #is invalid")
+                    row("#this #is invalid"), row("#soIsThis"),
+                    row("@fail #whale"), row("@fail whale")
                     // TODO
             )
 
