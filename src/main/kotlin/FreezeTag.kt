@@ -21,4 +21,16 @@ fun main(args: Array<String>) {
 
         println(statement)
     }
+
+
+//    val cs = ANTLRInputStream(`is`)
+//    val lexer = FreezeTagLexer(cs)
+//    val tokens = CommonTokenStream(lexer)
+//    val parser = FreezeTagParser(tokens)
+//    parser.addParseListener(TagListener())
+//    parser.start()
 }
+
+//private class TagListener : FreezeTagBaseListener() {
+//
+//}

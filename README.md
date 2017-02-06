@@ -32,7 +32,7 @@ Note that objects can have multiple properties with the same key. Thus, queries 
 values.
 ```
 @animal #name monkey +has tail +has head +has body
-@animal #name monkey has?
+@animal #name monkey #has?
 ```
 
 ## Relations
