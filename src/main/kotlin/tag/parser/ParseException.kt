@@ -1,4 +1,4 @@
-package parser
+package tag.parser
 
 /**
  * Thrown when an invalid statement is parsed.

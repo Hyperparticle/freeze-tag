@@ -8,3 +8,4 @@
 @person #firstName Holly #lastName Smith +knows @person #firstName John #lastName Wilkins;
 @person #firstName John #lastName Wilkins #knows @person?;
 #firstName Holly;
+@person

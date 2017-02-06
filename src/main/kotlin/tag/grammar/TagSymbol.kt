@@ -1,4 +1,4 @@
-package grammar
+package tag.grammar
 
 /**
  * A symbol prefix for an expression.
@@ -10,7 +10,6 @@ package grammar
  * @author Dan Kondratyuk
  */
 enum class TagSymbol(val symbol: String) {
-    AT("@"),
     HASH("#"),
     PLUS("+"),
     MINUS("-");
@@ -19,14 +18,6 @@ enum class TagSymbol(val symbol: String) {
         /** Maps symbol strings to their corresponding enumerated type */
         val symbolMap: Map<String, TagSymbol> = values().associateBy({ it.symbol }, { it } )
 
-        /** The symbol to indicate if the expression is a request */
-        val requestSymbol: String = "?"
-
-        private val symbolConjunction = symbolMap.keys
-                .map { Regex.escape(it) }
-                .joinToString("|")
-
-        /** A regex that matches an expression by its symbol prefix (using lookahead) */
-        val symbolRegex = Regex("(?=($symbolConjunction))")
+        operator fun get(key: String): TagSymbol? = symbolMap[key]
     }
 }

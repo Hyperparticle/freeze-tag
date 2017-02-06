@@ -1,5 +1,4 @@
-import parser.ParseException
-import parser.TagParser
+import tag.parser.*
 
 /**
  * The main program entry point.
@@ -14,23 +13,11 @@ fun main(args: Array<String>) {
     System.`in`.reader().forEachLine { line ->
         val statement = try {
             parser.parse(line)
-        } catch (e: ParseException) {
-            System.err.println(e.message)
+        } catch (e: Exception) {
+            println(e.message)
             return@forEachLine
         }
 
         println(statement)
     }
-
-
-//    val cs = ANTLRInputStream(`is`)
-//    val lexer = FreezeTagLexer(cs)
-//    val tokens = CommonTokenStream(lexer)
-//    val parser = FreezeTagParser(tokens)
-//    parser.addParseListener(TagListener())
-//    parser.start()
 }
-
-//private class TagListener : FreezeTagBaseListener() {
-//
-//}

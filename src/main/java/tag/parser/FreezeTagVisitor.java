@@ -1,5 +1,5 @@
 // Generated from C:/Users/hyper/Documents/GitHub/freeze-tag/src/main/antlr\FreezeTag.g4 by ANTLR 4.6
-package parser;
+package tag.parser;
 import org.antlr.v4.runtime.tree.ParseTreeVisitor;
 
 /**
