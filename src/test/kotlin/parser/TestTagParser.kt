@@ -82,7 +82,6 @@ class TestTagParser : StringSpec() {
             val statementTable = table(
                     headers("input", "count", "keys", "values"),
 
-                    row("", 0, emptyList(), emptyList()),
                     row("@person #name Emily", 2, listOf("person", "name"), listOf("", "Emily")),
                     row("@T #k v1 #k v2",      3, listOf("T", "k", "k"), listOf("", "v1", "v2")),
                     row("@T #k1 v1 #k3 @T #k2 v2", 5,
@@ -135,7 +134,8 @@ class TestTagParser : StringSpec() {
             val statementTable = table(
                     headers("input"),
                     row("#this #is invalid"), row("#soIsThis"),
-                    row("@fail #whale"), row("@fail whale")
+                    row("@fail #whale"), row("@fail whale"), row("#go"), row(""),
+                    row("@a #b? c")
                     // TODO
             )
 
