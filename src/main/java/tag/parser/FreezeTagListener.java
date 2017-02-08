@@ -87,4 +87,14 @@ public interface FreezeTagListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitRelation(FreezeTagParser.RelationContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link FreezeTagParser#string}.
+	 * @param ctx the parse tree
+	 */
+	void enterString(FreezeTagParser.StringContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link FreezeTagParser#string}.
+	 * @param ctx the parse tree
+	 */
+	void exitString(FreezeTagParser.StringContext ctx);
 }

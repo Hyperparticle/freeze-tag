@@ -36,14 +36,23 @@ class TagListener : FreezeTagBaseListener() {
 
     private fun createNode(ctx: FreezeTagParser.NodeContext?): TagNode {
         val type = ctx?.nodeType()?.ID()?.text
-        val properties = ctx?.nodeProperty()?.map {
-            val symbol = TagSymbol[it.PROP_S().text]!!
-            val key = it.ID(0).text
-            val value = it.ID(1).text
-            TagProperty(symbol, key, value)
-        }
 
-        return TagNode(type, properties)
+        val create = toPropertyMap(ctx, TagSymbol.PLUS)
+        val delete = toPropertyMap(ctx, TagSymbol.MINUS)
+        val match = toPropertyMap(ctx, TagSymbol.HASH)
+
+        return TagNode(type ?: "entity", create, delete, match)
+    }
+
+    private fun toPropertyMap(ctx: FreezeTagParser.NodeContext?, symbol: TagSymbol): List<Pair<String, String>> {
+        return ctx?.nodeProperty().orEmpty()
+                .filter { TagSymbol[it.PROP_S().text]!! == symbol }
+                .map {
+                    val key = it.ID().text
+                    val value = it.string().text
+                    Pair(key, value)
+                }
+//                .associateBy({ it.ID(1).text }, { it.ID(1).text })
     }
 
 }

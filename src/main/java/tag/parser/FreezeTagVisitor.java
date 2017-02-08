@@ -58,4 +58,10 @@ public interface FreezeTagVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitRelation(FreezeTagParser.RelationContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link FreezeTagParser#string}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitString(FreezeTagParser.StringContext ctx);
 }

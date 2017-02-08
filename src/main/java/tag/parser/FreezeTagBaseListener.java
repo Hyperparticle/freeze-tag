@@ -107,6 +107,18 @@ public class FreezeTagBaseListener implements FreezeTagListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitRelation(FreezeTagParser.RelationContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterString(FreezeTagParser.StringContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitString(FreezeTagParser.StringContext ctx) { }
 
 	/**
 	 * {@inheritDoc}

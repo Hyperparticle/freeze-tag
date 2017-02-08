@@ -14,7 +14,6 @@ class TagParser {
 
     /**
      * Parse the supplied statement and produce its corresponding statement object.
-     * @throws ParseException if one of the expressions in the statement is invalid
      */
     fun parse(statement: String): TagStatement {
         val cs = ANTLRInputStream(statement.byteInputStream())

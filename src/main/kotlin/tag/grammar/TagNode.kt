@@ -7,6 +7,8 @@ package tag.grammar
  * @author Dan Kondratyuk
  */
 data class TagNode(
-        val type: String?,
-        val properties: List<TagProperty>?
+        val type: String,
+        val create: List<Pair<String, String>>,
+        val delete: List<Pair<String, String>>,
+        val match: List<Pair<String, String>>
 )
