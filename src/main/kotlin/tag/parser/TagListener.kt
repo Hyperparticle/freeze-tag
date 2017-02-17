@@ -52,7 +52,6 @@ class TagListener : FreezeTagBaseListener() {
                     val value = it.string().text
                     Pair(key, value)
                 }
-//                .associateBy({ it.ID(1).text }, { it.ID(1).text })
     }
 
 }
