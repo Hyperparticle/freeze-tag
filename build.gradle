@@ -75,7 +75,7 @@ publishing {
             artifact javadocJar
             groupId 'bsu.slim'
             artifactId 'freeze-tag'
-            version version
+            version '0.1.2'
         }
     }
 }
@@ -91,7 +91,7 @@ bintray {
         licenses = ['MIT']
         vcsUrl = 'https://github.com/Hyperparticle/freeze-tag.git'
         version {
-            name = version
+            name = '0.1.2'
         }
     }
 }

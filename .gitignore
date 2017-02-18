@@ -202,3 +202,5 @@ Session.vim
 .netrwhist
 # auto-generated tag files
 tags
+
+gradle.properties
