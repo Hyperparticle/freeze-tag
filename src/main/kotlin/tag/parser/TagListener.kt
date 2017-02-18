@@ -41,7 +41,7 @@ class TagListener : FreezeTagBaseListener() {
         val delete = toPropertyMap(ctx, TagSymbol.MINUS)
         val match = toPropertyMap(ctx, TagSymbol.HASH)
 
-        return TagNode(type ?: "entity", create, delete, match)
+        return TagNode(type ?: "", create, delete, match)
     }
 
     private fun toPropertyMap(ctx: FreezeTagParser.NodeContext?, symbol: TagSymbol): List<Pair<String, String>> {
