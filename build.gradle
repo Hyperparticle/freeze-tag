@@ -1,5 +1,5 @@
 group 'com.hyperparticle'
-version '0.1.1'
+version '0.1.2'
 
 buildscript {
     ext.kotlin_version = '1.0.6'
@@ -75,7 +75,7 @@ publishing {
             artifact javadocJar
             groupId 'bsu.slim'
             artifactId 'freeze-tag'
-            version '0.1.1'
+            version version
         }
     }
 }
@@ -91,7 +91,7 @@ bintray {
         licenses = ['MIT']
         vcsUrl = 'https://github.com/Hyperparticle/freeze-tag.git'
         version {
-            name = '0.1.1'
+            name = version
         }
     }
 }

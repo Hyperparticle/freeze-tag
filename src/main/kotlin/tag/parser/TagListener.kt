@@ -25,8 +25,8 @@ class TagListener : FreezeTagBaseListener() {
     }
 
     override fun exitRelation(ctx: FreezeTagParser.RelationContext) {
-        val symbol = TagSymbol[ctx.PROP_S().text]!!
-        val id = ctx.ID().text
+        val symbol = TagSymbol[ctx.PROP_S().text.trim()]!!
+        val id = ctx.ID().text.trim()
         relation = TagRelation(symbol, id)
     }
 
@@ -35,7 +35,7 @@ class TagListener : FreezeTagBaseListener() {
     }
 
     private fun createNode(ctx: FreezeTagParser.NodeContext?): TagNode {
-        val type = ctx?.nodeType()?.ID()?.text
+        val type = ctx?.nodeType()?.ID()?.text?.trim()
 
         val create = toPropertyMap(ctx, TagSymbol.PLUS)
         val delete = toPropertyMap(ctx, TagSymbol.MINUS)
@@ -46,10 +46,10 @@ class TagListener : FreezeTagBaseListener() {
 
     private fun toPropertyMap(ctx: FreezeTagParser.NodeContext?, symbol: TagSymbol): List<Pair<String, String>> {
         return ctx?.nodeProperty().orEmpty()
-                .filter { TagSymbol[it.PROP_S().text]!! == symbol }
+                .filter { TagSymbol[it.PROP_S().text.trim()]!! == symbol }
                 .map {
-                    val key = it.ID().text
-                    val value = it.string().text
+                    val key = it.ID().text.trim()
+                    val value = it.string().text.trim()
                     Pair(key, value)
                 }
     }
