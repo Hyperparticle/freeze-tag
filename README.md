@@ -48,6 +48,13 @@ To increase flexibility, the `@` property and name can be omitted, creating a mo
 ```
 The search will not omit results based on whether the entity is a `@person`, `@place`, `@animal`, etc.
 
+## Search by Value
+To promote ease of use, a *search* property may have its *type* omitted. If we want to find Holly, instead of typing out `#firstName Holly`, we can leave out the `firstName`.
+```
+#Holly
+```
+This will retrieve anything and everything that has a value of Holly. Since Holly is a unique term, it is unlikely to clash with other entities that have this value associated with it.
+
 ## Relations (COMING SOON)
 
 **Relations are not completed yet, so skip this section.**

@@ -117,26 +117,39 @@ public class FreezeTagParser extends Parser {
 		enterRule(_localctx, 0, RULE_start);
 		int _la;
 		try {
+			int _alt;
 			enterOuterAlt(_localctx, 1);
 			{
 			setState(18);
 			statement();
 			setState(23);
 			_errHandler.sync(this);
-			_la = _input.LA(1);
-			while (_la==SEP_S) {
-				{
-				{
-				setState(19);
-				match(SEP_S);
-				setState(20);
-				statement();
-				}
+			_alt = getInterpreter().adaptivePredict(_input,0,_ctx);
+			while ( _alt!=2 && _alt!=org.antlr.v4.runtime.atn.ATN.INVALID_ALT_NUMBER ) {
+				if ( _alt==1 ) {
+					{
+					{
+					setState(19);
+					match(SEP_S);
+					setState(20);
+					statement();
+					}
+					} 
 				}
 				setState(25);
 				_errHandler.sync(this);
-				_la = _input.LA(1);
+				_alt = getInterpreter().adaptivePredict(_input,0,_ctx);
 			}
+			setState(27);
+			_errHandler.sync(this);
+			_la = _input.LA(1);
+			if (_la==SEP_S) {
+				{
+				setState(26);
+				match(SEP_S);
+				}
+			}
+
 			}
 		}
 		catch (RecognitionException re) {
@@ -187,44 +200,44 @@ public class FreezeTagParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(27);
+			setState(30);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
 			if (_la==WS) {
 				{
-				setState(26);
+				setState(29);
 				match(WS);
 				}
 			}
 
-			setState(29);
+			setState(32);
 			subject();
-			setState(34);
+			setState(37);
 			_errHandler.sync(this);
-			switch ( getInterpreter().adaptivePredict(_input,3,_ctx) ) {
+			switch ( getInterpreter().adaptivePredict(_input,4,_ctx) ) {
 			case 1:
 				{
-				setState(31);
+				setState(34);
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 				if (_la==WS) {
 					{
-					setState(30);
+					setState(33);
 					match(WS);
 					}
 				}
 
-				setState(33);
+				setState(36);
 				predicate();
 				}
 				break;
 			}
-			setState(37);
+			setState(40);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
 			if (_la==WS) {
 				{
-				setState(36);
+				setState(39);
 				match(WS);
 				}
 			}
@@ -271,7 +284,7 @@ public class FreezeTagParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(39);
+			setState(42);
 			node();
 			}
 		}
@@ -320,19 +333,19 @@ public class FreezeTagParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(41);
+			setState(44);
 			relation();
-			setState(43);
+			setState(46);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
 			if (_la==WS) {
 				{
-				setState(42);
+				setState(45);
 				match(WS);
 				}
 			}
 
-			setState(45);
+			setState(48);
 			node();
 			}
 		}
@@ -386,25 +399,25 @@ public class FreezeTagParser extends Parser {
 		int _la;
 		try {
 			int _alt;
-			setState(64);
+			setState(67);
 			_errHandler.sync(this);
-			switch ( getInterpreter().adaptivePredict(_input,10,_ctx) ) {
+			switch ( getInterpreter().adaptivePredict(_input,11,_ctx) ) {
 			case 1:
 				enterOuterAlt(_localctx, 1);
 				{
-				setState(51);
+				setState(54);
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 				if (_la==TYPE_S) {
 					{
-					setState(47);
+					setState(50);
 					nodeType();
-					setState(49);
+					setState(52);
 					_errHandler.sync(this);
 					_la = _input.LA(1);
 					if (_la==WS) {
 						{
-						setState(48);
+						setState(51);
 						match(WS);
 						}
 					}
@@ -412,40 +425,40 @@ public class FreezeTagParser extends Parser {
 					}
 				}
 
-				setState(53);
+				setState(56);
 				nodeProperty();
-				setState(60);
+				setState(63);
 				_errHandler.sync(this);
-				_alt = getInterpreter().adaptivePredict(_input,9,_ctx);
+				_alt = getInterpreter().adaptivePredict(_input,10,_ctx);
 				while ( _alt!=2 && _alt!=org.antlr.v4.runtime.atn.ATN.INVALID_ALT_NUMBER ) {
 					if ( _alt==1 ) {
 						{
 						{
-						setState(55);
+						setState(58);
 						_errHandler.sync(this);
 						_la = _input.LA(1);
 						if (_la==WS) {
 							{
-							setState(54);
+							setState(57);
 							match(WS);
 							}
 						}
 
-						setState(57);
+						setState(60);
 						nodeProperty();
 						}
 						} 
 					}
-					setState(62);
+					setState(65);
 					_errHandler.sync(this);
-					_alt = getInterpreter().adaptivePredict(_input,9,_ctx);
+					_alt = getInterpreter().adaptivePredict(_input,10,_ctx);
 				}
 				}
 				break;
 			case 2:
 				enterOuterAlt(_localctx, 2);
 				{
-				setState(63);
+				setState(66);
 				nodeType();
 				}
 				break;
@@ -490,9 +503,9 @@ public class FreezeTagParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(66);
+			setState(69);
 			match(TYPE_S);
-			setState(67);
+			setState(70);
 			match(ID);
 			}
 		}
@@ -539,14 +552,22 @@ public class FreezeTagParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(69);
-			match(PROP_S);
-			setState(70);
-			match(ID);
-			setState(71);
-			match(WS);
 			setState(72);
-			string();
+			match(PROP_S);
+			setState(73);
+			match(ID);
+			setState(76);
+			_errHandler.sync(this);
+			switch ( getInterpreter().adaptivePredict(_input,12,_ctx) ) {
+			case 1:
+				{
+				setState(74);
+				match(WS);
+				setState(75);
+				string();
+				}
+				break;
+			}
 			}
 		}
 		catch (RecognitionException re) {
@@ -588,9 +609,9 @@ public class FreezeTagParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(74);
+			setState(78);
 			match(PROP_S);
-			setState(75);
+			setState(79);
 			match(ID);
 			}
 		}
@@ -641,7 +662,7 @@ public class FreezeTagParser extends Parser {
 			int _alt;
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(78); 
+			setState(82); 
 			_errHandler.sync(this);
 			_alt = 1;
 			do {
@@ -649,7 +670,7 @@ public class FreezeTagParser extends Parser {
 				case 1:
 					{
 					{
-					setState(77);
+					setState(81);
 					_la = _input.LA(1);
 					if ( !(_la==ID || _la==WS) ) {
 					_errHandler.recoverInline(this);
@@ -665,9 +686,9 @@ public class FreezeTagParser extends Parser {
 				default:
 					throw new NoViableAltException(this);
 				}
-				setState(80); 
+				setState(84); 
 				_errHandler.sync(this);
-				_alt = getInterpreter().adaptivePredict(_input,11,_ctx);
+				_alt = getInterpreter().adaptivePredict(_input,13,_ctx);
 			} while ( _alt!=2 && _alt!=org.antlr.v4.runtime.atn.ATN.INVALID_ALT_NUMBER );
 			}
 		}
@@ -683,28 +704,29 @@ public class FreezeTagParser extends Parser {
 	}
 
 	public static final String _serializedATN =
-		"\3\u0430\ud6d1\u8206\uad2d\u4417\uaef1\u8d80\uaadd\3\7U\4\2\t\2\4\3\t"+
+		"\3\u0430\ud6d1\u8206\uad2d\u4417\uaef1\u8d80\uaadd\3\7Y\4\2\t\2\4\3\t"+
 		"\3\4\4\t\4\4\5\t\5\4\6\t\6\4\7\t\7\4\b\t\b\4\t\t\t\4\n\t\n\3\2\3\2\3\2"+
-		"\7\2\30\n\2\f\2\16\2\33\13\2\3\3\5\3\36\n\3\3\3\3\3\5\3\"\n\3\3\3\5\3"+
-		"%\n\3\3\3\5\3(\n\3\3\4\3\4\3\5\3\5\5\5.\n\5\3\5\3\5\3\6\3\6\5\6\64\n\6"+
-		"\5\6\66\n\6\3\6\3\6\5\6:\n\6\3\6\7\6=\n\6\f\6\16\6@\13\6\3\6\5\6C\n\6"+
-		"\3\7\3\7\3\7\3\b\3\b\3\b\3\b\3\b\3\t\3\t\3\t\3\n\6\nQ\n\n\r\n\16\nR\3"+
-		"\n\2\2\13\2\4\6\b\n\f\16\20\22\2\3\3\2\6\7W\2\24\3\2\2\2\4\35\3\2\2\2"+
-		"\6)\3\2\2\2\b+\3\2\2\2\nB\3\2\2\2\fD\3\2\2\2\16G\3\2\2\2\20L\3\2\2\2\22"+
-		"P\3\2\2\2\24\31\5\4\3\2\25\26\7\3\2\2\26\30\5\4\3\2\27\25\3\2\2\2\30\33"+
-		"\3\2\2\2\31\27\3\2\2\2\31\32\3\2\2\2\32\3\3\2\2\2\33\31\3\2\2\2\34\36"+
-		"\7\7\2\2\35\34\3\2\2\2\35\36\3\2\2\2\36\37\3\2\2\2\37$\5\6\4\2 \"\7\7"+
-		"\2\2! \3\2\2\2!\"\3\2\2\2\"#\3\2\2\2#%\5\b\5\2$!\3\2\2\2$%\3\2\2\2%\'"+
-		"\3\2\2\2&(\7\7\2\2\'&\3\2\2\2\'(\3\2\2\2(\5\3\2\2\2)*\5\n\6\2*\7\3\2\2"+
-		"\2+-\5\20\t\2,.\7\7\2\2-,\3\2\2\2-.\3\2\2\2./\3\2\2\2/\60\5\n\6\2\60\t"+
-		"\3\2\2\2\61\63\5\f\7\2\62\64\7\7\2\2\63\62\3\2\2\2\63\64\3\2\2\2\64\66"+
-		"\3\2\2\2\65\61\3\2\2\2\65\66\3\2\2\2\66\67\3\2\2\2\67>\5\16\b\28:\7\7"+
-		"\2\298\3\2\2\29:\3\2\2\2:;\3\2\2\2;=\5\16\b\2<9\3\2\2\2=@\3\2\2\2><\3"+
-		"\2\2\2>?\3\2\2\2?C\3\2\2\2@>\3\2\2\2AC\5\f\7\2B\65\3\2\2\2BA\3\2\2\2C"+
-		"\13\3\2\2\2DE\7\4\2\2EF\7\6\2\2F\r\3\2\2\2GH\7\5\2\2HI\7\6\2\2IJ\7\7\2"+
-		"\2JK\5\22\n\2K\17\3\2\2\2LM\7\5\2\2MN\7\6\2\2N\21\3\2\2\2OQ\t\2\2\2PO"+
-		"\3\2\2\2QR\3\2\2\2RP\3\2\2\2RS\3\2\2\2S\23\3\2\2\2\16\31\35!$\'-\63\65"+
-		"9>BR";
+		"\7\2\30\n\2\f\2\16\2\33\13\2\3\2\5\2\36\n\2\3\3\5\3!\n\3\3\3\3\3\5\3%"+
+		"\n\3\3\3\5\3(\n\3\3\3\5\3+\n\3\3\4\3\4\3\5\3\5\5\5\61\n\5\3\5\3\5\3\6"+
+		"\3\6\5\6\67\n\6\5\69\n\6\3\6\3\6\5\6=\n\6\3\6\7\6@\n\6\f\6\16\6C\13\6"+
+		"\3\6\5\6F\n\6\3\7\3\7\3\7\3\b\3\b\3\b\3\b\5\bO\n\b\3\t\3\t\3\t\3\n\6\n"+
+		"U\n\n\r\n\16\nV\3\n\2\2\13\2\4\6\b\n\f\16\20\22\2\3\3\2\6\7]\2\24\3\2"+
+		"\2\2\4 \3\2\2\2\6,\3\2\2\2\b.\3\2\2\2\nE\3\2\2\2\fG\3\2\2\2\16J\3\2\2"+
+		"\2\20P\3\2\2\2\22T\3\2\2\2\24\31\5\4\3\2\25\26\7\3\2\2\26\30\5\4\3\2\27"+
+		"\25\3\2\2\2\30\33\3\2\2\2\31\27\3\2\2\2\31\32\3\2\2\2\32\35\3\2\2\2\33"+
+		"\31\3\2\2\2\34\36\7\3\2\2\35\34\3\2\2\2\35\36\3\2\2\2\36\3\3\2\2\2\37"+
+		"!\7\7\2\2 \37\3\2\2\2 !\3\2\2\2!\"\3\2\2\2\"\'\5\6\4\2#%\7\7\2\2$#\3\2"+
+		"\2\2$%\3\2\2\2%&\3\2\2\2&(\5\b\5\2\'$\3\2\2\2\'(\3\2\2\2(*\3\2\2\2)+\7"+
+		"\7\2\2*)\3\2\2\2*+\3\2\2\2+\5\3\2\2\2,-\5\n\6\2-\7\3\2\2\2.\60\5\20\t"+
+		"\2/\61\7\7\2\2\60/\3\2\2\2\60\61\3\2\2\2\61\62\3\2\2\2\62\63\5\n\6\2\63"+
+		"\t\3\2\2\2\64\66\5\f\7\2\65\67\7\7\2\2\66\65\3\2\2\2\66\67\3\2\2\2\67"+
+		"9\3\2\2\28\64\3\2\2\289\3\2\2\29:\3\2\2\2:A\5\16\b\2;=\7\7\2\2<;\3\2\2"+
+		"\2<=\3\2\2\2=>\3\2\2\2>@\5\16\b\2?<\3\2\2\2@C\3\2\2\2A?\3\2\2\2AB\3\2"+
+		"\2\2BF\3\2\2\2CA\3\2\2\2DF\5\f\7\2E8\3\2\2\2ED\3\2\2\2F\13\3\2\2\2GH\7"+
+		"\4\2\2HI\7\6\2\2I\r\3\2\2\2JK\7\5\2\2KN\7\6\2\2LM\7\7\2\2MO\5\22\n\2N"+
+		"L\3\2\2\2NO\3\2\2\2O\17\3\2\2\2PQ\7\5\2\2QR\7\6\2\2R\21\3\2\2\2SU\t\2"+
+		"\2\2TS\3\2\2\2UV\3\2\2\2VT\3\2\2\2VW\3\2\2\2W\23\3\2\2\2\20\31\35 $\'"+
+		"*\60\668<AENV";
 	public static final ATN _ATN =
 		new ATNDeserializer().deserialize(_serializedATN.toCharArray());
 	static {

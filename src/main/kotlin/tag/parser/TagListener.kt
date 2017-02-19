@@ -1,6 +1,7 @@
 package tag.parser
 
 import tag.grammar.*
+import java.util.*
 
 /**
  *
@@ -41,17 +42,34 @@ class TagListener : FreezeTagBaseListener() {
         val delete = toPropertyMap(ctx, TagSymbol.MINUS)
         val match = toPropertyMap(ctx, TagSymbol.HASH)
 
-        return TagNode(type ?: "", create, delete, match)
+        val node = TagNode(type ?: "", create, delete, match)
+
+        validate(node)
+
+        return node
     }
 
     private fun toPropertyMap(ctx: FreezeTagParser.NodeContext?, symbol: TagSymbol): List<Pair<String, String>> {
         return ctx?.nodeProperty().orEmpty()
                 .filter { TagSymbol[it.PROP_S().text.trim()]!! == symbol }
                 .map {
-                    val key = it.ID().text.trim()
-                    val value = it.string().text.trim()
-                    Pair(key, value)
+                    when {
+                        it.string() == null -> Pair("", it.ID().text.trim())
+                        else -> Pair(it.ID().text.trim(), it.string().text.trim())
+                    }
                 }
+    }
+
+    private fun validate(node: TagNode) {
+        val createValue = node.create.find { it.first.isBlank() }
+        if (createValue != null) {
+            throw IllegalArgumentException("Create expression must have a pair of values: ${createValue.second}")
+        }
+
+        val deleteValue = node.delete.find { it.first.isBlank() }
+        if (deleteValue != null) {
+            throw IllegalArgumentException("Delete expression must have a pair of values: ${deleteValue.second}")
+        }
     }
 
 }

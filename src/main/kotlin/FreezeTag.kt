@@ -14,6 +14,7 @@ fun main(args: Array<String>) {
         val statement = try {
             parser.parse(line)
         } catch (e: Exception) {
+            println(e.javaClass.typeName)
             println(e.message)
             return@forEachLine
         }
