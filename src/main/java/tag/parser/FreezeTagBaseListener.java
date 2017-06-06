@@ -1,4 +1,4 @@
-// Generated from C:/Users/hyper/Documents/GitHub/freeze-tag/src/main/antlr\FreezeTag.g4 by ANTLR 4.6
+// Generated from /home/hyper/Documents/drive/code/projects/freeze-tag/src/main/antlr/FreezeTag.g4 by ANTLR 4.7
 package tag.parser;
 
 import org.antlr.v4.runtime.ParserRuleContext;
